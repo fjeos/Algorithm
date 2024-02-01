@@ -13,10 +13,7 @@ for i in range(M):
         mid = (start + end) // 2
         pivot = A[mid]
         
-        if B[i] == pivot:
-            found = True
-            break
-        elif B[i] < pivot:
+        if B[i] < pivot:
             end = mid - 1
             mid = (start + end) // 2
             pivot = A[mid]
@@ -24,5 +21,8 @@ for i in range(M):
             start = mid + 1
             mid = (start + end) // 2
             pivot = A[mid]
+        else:
+            found = True
+            break
         
     print(1 if found else 0)
