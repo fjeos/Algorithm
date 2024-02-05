@@ -1,14 +1,17 @@
 from collections import deque
 
 for _ in range(int(input())):
+    
     M, N, K = map(int, input().split())
     field = [[0] * M for _ in range(N)]
     visited = [[False] * M for _ in range(N)]
     dx = [0, 0, -1, 1]
     dy = [-1, 1, 0, 0]
+    
     for i in range(K):
         y, x = map(int, input().split())
         field[x][y] = 1
+        
     result = []
     queue = deque()
     for k in range(N):
