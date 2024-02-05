@@ -1,3 +1,6 @@
+import sys
+input = sys.stdin.readline
+
 T = int(input())
 lists = []
 for _ in range(T):
