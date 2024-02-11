@@ -6,12 +6,5 @@ cards = list(map(int, input().split()))
 cards = set(cards)
 M = int(input())
 nums = list(map(int, input().split()))
-result = []
-for i in range(M):
-    if nums[i] in cards:
-        result.append(1)
-    else:
-        result.append(0)
-        
-print(' '.join(map(str, result)))
-    
+
+print(' '.join(map(str, list(map(lambda x:1 if x in cards else 0, nums)))))    
