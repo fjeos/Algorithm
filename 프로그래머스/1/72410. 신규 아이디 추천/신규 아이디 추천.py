@@ -8,7 +8,7 @@ def solution(new_id):
             answer.pop(index)
             continue
         index += 1
-    count, index, i, first = 0, 0, 0, False
+    count, index, i, first = -1, 0, 0, True
     while i < len(answer):
         if answer[i] == '.':
             if first:
