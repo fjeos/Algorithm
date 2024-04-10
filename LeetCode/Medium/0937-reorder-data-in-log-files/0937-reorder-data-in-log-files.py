@@ -1,16 +1,17 @@
 class Solution:
     def reorderLogFiles(self, logs: List[str]) -> List[str]:
-        new_lists = []
-        i = 0
-        while i < len(logs):
-            if logs[i][logs[i].index(' ')+1].isalpha():
-                new_lists.append(logs[i].split())
-                logs.pop(i)
-                i -= 1
-            i += 1
-        new_lists.sort(key = lambda x: (x[1:], x[0]))
-        for i in range(len(new_lists)):
-            new_lists[i] = ' '.join(new_lists[i])
-        new_lists.extend(logs)
-
-        return new_lists
+        letters = []
+        digits = []
+        
+        #각 log가 숫자이면 digits 리스트에, 문자이면 letters 리스트에 추가
+        for log in logs:
+            if log.split()[1].isdigit():
+                digits.append(log)
+            else:
+                letters.append(log)
+                
+        #letters 리스트를 식별자를 제외한 값으로 정렬하고, 모두 같으면 식별자를 기준으로 정렬
+        letters.sort(key = lambda x: (x.split()[1:], x.split()[0]))
+        
+        #letter 리스트와 digits 리스트를 연결하여 리턴
+        return letters + digits
