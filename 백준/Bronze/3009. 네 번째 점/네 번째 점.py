@@ -1,20 +1,16 @@
-from collections import defaultdict
+import sys
+input = lambda: sys.stdin.readline().rstrip()
 
-lists = [list(map(int, input().split())) for _ in range(3)]
-
-dic = defaultdict(int)
+x_list, y_list = [], []
+x, y = 0, 0
 for i in range(3):
-    dic[lists[i][0]] += 1
+    x, y = map(int, input().split())
+    x_list.append(x)
+    y_list.append(y)
 
-for k in dic:
-    if dic[k] == 1:
-        print(k, end=' ')
-
-dic = defaultdict(int)
 for i in range(3):
-    dic[lists[i][1]] += 1
-
-for k in dic:
-    if dic[k] == 1:
-        print(k, end=' ')
-
+    if x_list.count(x_list[i]) == 1:
+        x = x_list[i]
+    if y_list.count(y_list[i]) == 1:
+        y = y_list[i]
+print(x, y)
