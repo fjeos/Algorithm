@@ -15,7 +15,6 @@ class Solution:
                 queue.append((i, j))
                 while queue:
                     x, y = queue.popleft()
-                    visited[x][y] = True
                     for k in range(4):
                         nx = x + dx[k]
                         ny = y + dy[k]
