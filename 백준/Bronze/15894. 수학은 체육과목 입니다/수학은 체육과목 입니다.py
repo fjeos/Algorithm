@@ -1,2 +1,1 @@
-N = int(input())
-print(4 * N)
+print(4 * int(input()))
