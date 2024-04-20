@@ -8,13 +8,12 @@ class Solution:
 
         for i in range(m):
             for j in range(n):
-                if land[i][j] <= 0:
+                if land[i][j] == 0:
                     continue
                 queue.append((i, j))
                 max_x, max_y = i, j
                 while queue:
                     x, y = queue.popleft()
-                    land[x][y] -= 1
                     for k in range(4):
                         nx = x + dx[k]
                         ny = y + dy[k]
