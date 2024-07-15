@@ -8,7 +8,6 @@ danji = []
 dx = [0, 0, -1, 1]
 dy = [-1, 1, 0, 0]
 queue = deque()
-count = 0
 for k in range(N):
     for l in range(N):
         if jido[k][l] == 0 or visited[k][l]:
