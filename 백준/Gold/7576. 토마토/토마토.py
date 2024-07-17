@@ -2,42 +2,36 @@ from collections import deque
 import sys
 input = lambda: sys.stdin.readline().rstrip()
 
-N, M = map(int, input().split())
+M, N = map(int, input().split())
 
-tomatoes = [list(map(int, input().split())) for _ in range(M)]
-visited = [[False for _ in range(N)] for _ in range(M)]
+tomatoes = [list(map(int, input().split())) for _ in range(N)]
 matured = deque()
-for i in range(M):
-    for j in range(N):
+for i in range(N):
+    for j in range(M):
         if tomatoes[i][j] == 1:
-            visited[i][j] = True
-            matured.append((j, i))
+            matured.append((i, j))
 
 if not any(0 in tomato for tomato in tomatoes):
     print(0)
+elif not matured:
+    print(-1)
 else:
     days = 0
-    queue = deque()
-    dx = [0, 0, -1, 1]
-    dy = [1, -1, 0, 0]
+    dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
 
     while matured:
-        while matured:
-            queue.append(matured.popleft())
-        while queue:
-            x, y = queue.popleft()
+        x, y = matured.popleft()
 
-            for n in range(4):
-                nx = x + dx[n]
-                ny = y + dy[n]
-                if 0 <= nx < N and 0 <= ny < M and not visited[ny][nx] and tomatoes[ny][nx] != -1:
-                    matured.append((nx, ny))
-                    tomatoes[ny][nx] = 1
-                    visited[ny][nx] = True
-        if matured:
-            days += 1
+        for n in range(4):
+            nx, ny = x + dx[n], y + dy[n]
+            if 0 <= nx < N and 0 <= ny < M and tomatoes[nx][ny] == 0:
+                matured.append((nx, ny))
+                tomatoes[nx][ny] = tomatoes[x][y] + 1
 
-    for k in range(M):
-        if 0 in tomatoes[k]:
-            days = -1
-    print(days)
+    for tomato in tomatoes:
+        if 0 in tomato:
+            print(-1)
+            exit(0)
+        else:
+            days = max(days, max(tomato))
+    print(days - 1)
