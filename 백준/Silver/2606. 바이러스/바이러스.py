@@ -1,23 +1,22 @@
-from collections import deque 
+import sys
+input = lambda: sys.stdin.readline().rstrip()
 
-N = int(input()) 
-M = int(input())
+from collections import deque
 
-graph = [[] for _ in range(N+1)]
-for _ in range(M): 
-    u, v = map(int, input().split()) 
-    graph[u] += [v]
-    graph[v] += [u]
-
-visited = [0] * (N+1)
-visited[1] = 1
-
-queue = deque([1])
+N = int(input())
+pairs = int(input())
+computers = [[] for _ in range(N + 1)]
+for i in range(pairs):
+    x, y = map(int, input().split())
+    computers[x].append(y)
+    computers[y].append(x)
+visited = [False for _ in range(N + 1)]
+queue = deque(computers[1])
 while queue:
-    v = queue.popleft()
-    for nextCom in graph[v]:
-        if visited[nextCom] == 0:
-            queue.append(nextCom)
-            visited[nextCom] = 1
-    
-print(sum(visited) - 1)
+    index = queue.popleft()
+    for com in computers[index]:
+        if not visited[com] and com != 1:
+            queue.append(com)
+            visited[com] = True
+    visited[index] = True
+print(visited.count(True))
