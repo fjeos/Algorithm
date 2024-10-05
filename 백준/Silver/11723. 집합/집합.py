@@ -2,15 +2,14 @@ import sys
 input = lambda: sys.stdin.readline().rstrip()
 
 S = set()
-gen_list = set(i for i in range(1, 21))
+gen_list = set(range(1, 21))
 for _ in range(int(input())):
     commands = input()
-    command, num = '', 0
-    try:
+    if 'all' not in commands and 'empty' not in commands:
         command, num = commands.split()
-    except ValueError:
+        num = int(num)
+    else:
         command = commands
-    num = int(num)
     if command == 'add':
         S.add(num)
     elif command == 'remove':
