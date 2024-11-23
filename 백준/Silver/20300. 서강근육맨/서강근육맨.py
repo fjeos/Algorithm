@@ -1,19 +1,20 @@
 import sys
+
 input = lambda: sys.stdin.readline().rstrip()
 
 N = int(input())
-PT = list(map(int, input().split()))
-PT.sort()
+gym = sorted(list(map(int, input().split())))
 
-if N % 2 == 0:
-    result, end = 0, N - 1
+result = 0
+if N == 1:
+    result = gym[0]
+# 짝수
+elif N % 2 == 0:
+    for i in range(N // 2):
+        result = max(gym[i] + gym[-i-1], result)
+# 홀수
 else:
-    result, end = PT[-1], N - 2
-
-start = 0
-while start < end:
-    result = max(result, PT[start] + PT[end])
-    start += 1
-    end -= 1
+    for i in range(N // 2):
+        result = max(gym[i] + gym[-i-2], result)
 
 print(result)
