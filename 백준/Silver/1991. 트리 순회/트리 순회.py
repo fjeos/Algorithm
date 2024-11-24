@@ -1,38 +1,44 @@
 import sys
+
 input = lambda: sys.stdin.readline().rstrip()
 
-from collections import deque
+
+def preorder(root, order):
+    order += root
+    left, right = dic[root][0], dic[root][1]
+    if left != '.':
+        order = preorder(left, order)
+    if right != '.':
+        order = preorder(right, order)
+    return order
+
+
+def inorder(root, order):
+    left, right = dic[root][0], dic[root][1]
+    if left != '.':
+        order = inorder(left, order)
+    order += root
+    if right != '.':
+        order = inorder(right, order)
+    return order
+
+
+def postorder(root, order):
+    left, right = dic[root][0], dic[root][1]
+    if left != '.':
+        order = postorder(left, order)
+    if right != '.':
+        order = postorder(right, order)
+    order += root
+    return order
+
 
 N = int(input())
-tree = {}
+dic = dict()
 for _ in range(N):
-    s = input().split()
-    tree[s[0]] = s[1], s[2]
+    parent, left, right = input().split()
+    dic[parent] = [left, right]
 
-
-def preorder(v):
-    if v != '.':
-        print(v, end="")
-        preorder(tree[v][0])
-        preorder(tree[v][1])
-
-
-def inorder(v):
-    if v != '.':
-        inorder(tree[v][0])
-        print(v, end="")
-        inorder(tree[v][1])
-
-
-def postorder(v):
-    if v != '.':
-        postorder(tree[v][0])
-        postorder(tree[v][1])
-        print(v, end="")
-
-
-preorder("A")
-print()
-inorder("A")
-print()
-postorder("A")
+print(preorder('A', ''))
+print(inorder('A', ''))
+print(postorder('A', ''))
