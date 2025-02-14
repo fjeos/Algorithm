@@ -1,6 +1,6 @@
 # [level 2] 줄 서는 방법 - 12936 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12936#qna) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12936) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 12월 03일 20:31:15
+2025년 02월 15일 00:33:49
 
 ### 문제 설명
 
