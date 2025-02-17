@@ -1,18 +1,23 @@
 import heapq
 def solution(n, k, enemy):
-    if len(enemy) <= k:
-        return len(enemy)
-    
+    length = len(enemy)
+    if length <= k or sum(enemy) <= n:
+        return length
     heap = []
-    
-    for i, en in enumerate(enemy):
-        heapq.heappush(heap, -en)
-        n -= en
+    for i in range(length):
+        n -= enemy[i]
+        heapq.heappush(heap, (-enemy[i], enemy[i]))
         if n < 0:
             if k > 0:
-                k -= 1
-                n += -heapq.heappop(heap)
+                if heap:
+                    k -= 1
+                    n += heapq.heappop(heap)[1]
+                else:
+                    k -= 1
             else:
-                return i
-                
-    return len(enemy)
+                if n >= enemy[i]:
+                    n -= enemy[i]
+                    heapq.heappush(heap, (-enemy[i], enemy[i]))
+                else:
+                    return i   
+    return i + 1
