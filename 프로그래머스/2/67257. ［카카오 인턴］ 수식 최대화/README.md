@@ -1,10 +1,10 @@
 # [level 2] [카카오 인턴] 수식 최대화 - 67257 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/67257) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/67257#) 
 
 ### 성능 요약
 
-메모리: 10.2 MB, 시간: 0.39 ms
+메모리: 10.4 MB, 시간: 0.47 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 11월 17일 00:26:48
+2025년 02월 23일 01:38:26
 
 ### 문제 설명
 

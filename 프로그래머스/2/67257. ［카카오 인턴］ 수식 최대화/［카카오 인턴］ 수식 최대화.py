@@ -1,61 +1,26 @@
 from itertools import permutations
-
-
-def calcResult(index, lists, operator):
-    x, y = int(lists[index - 1]), int(lists[index + 1])
-    lists.pop(index - 1)
-    lists.pop(index - 1)
-    lists.pop(index - 1)
-    if operator == '*':
-        result = x * y
-    elif operator == '+':
-        result = x + y
-    else:
-        result = x - y
-    lists.insert(index - 1, result)
-
-
+import re
 def solution(expression):
-    answer, kinds, origin = [], set(), []
-    temp = ''
-    for i in range(len(expression)):
-        if expression[i] == '+' or expression[i] == '*' or expression[i] == '-':
-            kinds.add(expression[i])
-            origin.append(temp)
-            origin.append(expression[i])
-            temp = ''
-        else:
-            temp += expression[i]
-    origin.append(temp)
-    perm = list(permutations(kinds, len(kinds)))
-
-    for i in range(len(perm)):
-        lists = origin[:]
-        for j in range(len(perm[i])):
-            if perm[i][j] == '*':
-                try:
-                    index = lists.index('*')
-                    while index > 0:
-                        calcResult(index, lists, '*')
-                        index = lists.index('*')
-                except ValueError:
-                    continue
-            elif perm[i][j] == '+':
-                try:
-                    index = lists.index('+')
-                    while index > 0:
-                        calcResult(index, lists, '+')
-                        index = lists.index('+')
-                except ValueError:
-                    continue
-            else:
-                try:
-                    index = lists.index('-')
-                    while index > 0:
-                        calcResult(index, lists, '-')
-                        index = lists.index('-')
-                except ValueError:
-                    continue
-        answer.append(abs(int(lists[0])))
-
-    return max(answer)
+    permu = list(permutations(['+', '-', '*'], 3))
+    oper_list = re.split(r'(\D)', expression)
+    max_value = 0
+    for perms in permu:
+        temp_list = oper_list[:]
+        for op in perms:
+            stack = []
+            while temp_list:
+                val = temp_list.pop(0)
+                if val == op:
+                    prev = stack.pop()
+                    nex = temp_list.pop(0)
+                    if val == '+':
+                        stack.append(str(int(prev) + int(nex)))
+                    elif val == '-':
+                        stack.append(str(int(prev) - int(nex)))
+                    else:
+                        stack.append(str(int(prev) * int(nex)))
+                else:
+                    stack.append(val)
+            temp_list = stack
+        max_value = max(abs(int(temp_list[0])), max_value)
+    return max_value
