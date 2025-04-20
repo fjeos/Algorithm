@@ -1,22 +1,20 @@
+import sys, heapq
+
+input = lambda: sys.stdin.readline().rstrip()
+
 X = int(input())
+sticks = []
+heapq.heapify(sticks)
+heapq.heappush(sticks, 64)
 
-makdae = 0
-gil = 0    
-shortest = 0
-temp = 64
-
-if X == 64: 
-    makdae += 1
-    print(makdae)
-else:
-    while(True) :
-        shortest = temp/2
-        temp /= 2
-        if(shortest <= X):
-            if(gil + shortest <= X):
-                gil += shortest
-                makdae += 1
-        if gil == X:
-            break
-        
-    print(makdae)
+count = 1
+while sum(sticks) != X:
+    shortest_sticks = heapq.heappop(sticks)
+    shortest_sticks //= 2
+    if sum(sticks) + shortest_sticks >= X:
+        heapq.heappush(sticks, shortest_sticks)
+    else:
+        heapq.heappush(sticks, shortest_sticks)
+        heapq.heappush(sticks, shortest_sticks)
+    
+print(len(sticks))
