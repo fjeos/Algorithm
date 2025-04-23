@@ -1,12 +1,13 @@
-from collections import deque, defaultdict
 def solution(numbers, target):
-    index = value = 0
-    
-    def dfs(nums, target, value, index):
-        if index == len(nums):
-            return 1 if value == target else 0
-        return dfs(nums, target, value + nums[index], index + 1) \
-                + dfs(nums, target, value - nums[index], index + 1)
-    
-    answer = dfs(numbers, target, index, value)
+    answer = 0
+    def dfs(depth, now_sum):
+        nonlocal answer
+        if depth == len(numbers):
+            if now_sum == target:
+                answer += 1
+            return
+        dfs(depth + 1, now_sum + numbers[depth])
+        dfs(depth + 1, now_sum - numbers[depth])
+    dfs(0, 0)
+        
     return answer
