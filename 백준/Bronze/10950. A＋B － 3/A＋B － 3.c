@@ -1,0 +1,9 @@
+#include <stdio.h>
+int main(void) {
+    int t,x,y,i;
+    scanf("%d",&t);
+    for(i=0; i<t; i++) {
+        scanf("%d %d", &x, &y);
+        printf("%d\n",x+y);
+    }
+}
