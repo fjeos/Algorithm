@@ -1,19 +1,18 @@
 def solution(k, dungeons):
-    dungeon = []
-    for i in permutations(dungeons, len(dungeons)):
-        dungeon.append(list(i))
+    answer = 0
+    visited = [False] * len(dungeons)
 
-    answer = []
-    for i in range(len(dungeon)):
-        pirodo = k
-        count = 0
-        for j in dungeon[i]:
-            if pirodo >= j[0]:
-                pirodo -= j[1]
-                count += 1
-            else:
-                break
-        answer.append(count)     
-    return max(answer)
+    def dfs(fatigue, count):
+        nonlocal answer
+        answer = max(answer, count)
 
-from itertools import permutations
+        for i in range(len(dungeons)):
+            need, use = dungeons[i]
+            if not visited[i] and fatigue >= need:
+                visited[i] = True
+                dfs(fatigue - use, count + 1)
+                visited[i] = False
+
+    dfs(k, 0)
+
+    return answer
